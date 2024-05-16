@@ -4,7 +4,7 @@ import { insides } from "../assets/data/insides";
 import { rooms } from "../assets/data/rooms";
 import { useEffect, useState } from "react";
 
-const RandomRoomGenerator = () => {
+export const Room = ({withCorridor = true}) => {
   const [roomData, setRoomData] = useState<undefined | {tunel: string, room: string, insides: string, furniture: string, items: string}> (undefined);
 
   const generateRoom = () => {
@@ -21,18 +21,26 @@ const RandomRoomGenerator = () => {
     generateRoom();
   }, [])
 
-  const Room = () => {
-    return <>
-      You ware wandering through <b>{roomData?.tunel}</b><br/>
-      which leads you into <b>{roomData?.room}</b>.<br/>
-      Inside the room, you can see <b>{roomData?.insides}</b>.<br/>
-      You can find here <b>{roomData?.furniture}</b>,<br/>
-      and you can find <b>{roomData?.items}</b> after searching it.<br/>
-    </>
-  }
+  return <div>
+    <span onClick={generateRoom} style={{cursor: 'pointer', color: 'orange'}} className="no-print">♻</span>{" "}
+    {withCorridor && <>You were wandering through <b>{roomData?.tunel}</b>. </>}
+    You enter into <b>{roomData?.room}</b>. 
+    Inside the room, you can see <b>{roomData?.insides}</b>. 
+    You can find here <b>{roomData?.furniture}</b>, 
+    and after short investigetion you can find <b>{roomData?.items}</b>. 
+  </div>
+}
 
-  return <div className="terminal">
-    <button onClick={generateRoom}>New room</button>
+const RandomRoomGenerator = () => {
+
+  return <div className="terminal with-wrap">
+    <Room />
+    <hr/>
+    <Room />
+    <hr/>
+    <Room />
+    <hr/>
+    <Room />
     <hr/>
     <Room />
   </div> 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Room } from './RandomRoomGenerator';
 
 interface Room {
   x: number;
@@ -8,7 +9,7 @@ interface Room {
 }
 
 const DungeonGenerator: React.FC = () => {
-  const dungeonWidth = 75;
+  const dungeonWidth = 70;
   const dungeonHeight = 25;
   const roomMaxSize = 6;
   const roomMinSize = 3;
@@ -16,15 +17,16 @@ const DungeonGenerator: React.FC = () => {
   const initialDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
 
   const [dungeon, setDungeon] = useState<string[][]>(initialDungeon);
+  const [rooms, setRooms] = useState<number>(0);
 
   const createRoom = (x: number, y: number, width: number, height: number) => {
+    setRooms((prev) => prev + 1);
     const newDungeon = [...dungeon];
     for (let i = y; i < y + height; i++) {
       for (let j = x; j < x + width; j++) {
         newDungeon[i][j] = "#";
       }
     }
-    console.log(newDungeon);
     setDungeon(newDungeon);
   };
 
@@ -54,7 +56,6 @@ const DungeonGenerator: React.FC = () => {
     let corridors: Room[] = [];
     let numRooms = 0;
     let roomNumber = 1;
-    let corridorNumber = 1;
     let newDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
   
     while (numRooms < maxRooms) {
@@ -109,12 +110,6 @@ const DungeonGenerator: React.FC = () => {
       roomNumber++;
     }
   
-    // Label corridors
-    for (let corridor of corridors) {
-      labelCorridor(corridor, corridorNumber.toString());
-      corridorNumber++;
-    }
-  
     // Copy the modified dungeon layout into newDungeon
     for (let i = 0; i < dungeonHeight; i++) {
       for (let j = 0; j < dungeonWidth; j++) {
@@ -135,15 +130,6 @@ const DungeonGenerator: React.FC = () => {
     dungeon[randomY][randomX] = label;
   };
 
-  const labelCorridor = (corridor: Room, label: string) => {
-    // Choose a random cell within the corridor
-    const randomX = Math.floor(Math.random() * corridor.width) + corridor.x;
-    const randomY = Math.floor(Math.random() * corridor.height) + corridor.y;
-    
-    // Label the random cell with the given label
-    dungeon[randomY][randomX] = label;
-  };
-
   const renderDungeon = () => {
     return dungeon.map((row, rowIndex) => (
       <div key={rowIndex}>
@@ -157,18 +143,41 @@ const DungeonGenerator: React.FC = () => {
 
   const reset = () => {
     setDungeon(initialDungeon);
+    setRooms(0);
   }
 
   return (
     <div>
-      <h1>ASCII Dungeon Generator (React)</h1>
-      <button onClick={generateDungeonRooms}>Generate Dungeon</button>
-      <button onClick={reset}>Reset</button>
-      <br />
+      <div className="no-print">
+        <h1>ASCII Dungeon Generator (React)</h1>
+        <div className="formLike">
+          <div className="formGroup">
+            <label htmlFor="rooms">Number of Rooms</label>
+            <input type="number" id="rooms" value={0} onChange={() => {}} />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="minSize">Min Room size</label>
+            <input type="number" id="minSize" value={0} onChange={() => {}} />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="maxSize">Max Room size</label>
+            <input type="number" id="maxSize" value={0} onChange={() => {}} />
+          </div>
+          <div className="formGroup">
+          <button onClick={generateDungeonRooms}>Generate Dungeon</button>
+        <button onClick={reset}>Reset</button>
+          </div>
+        </div>
+      </div>
       <div className="terminal">
       <div className="dungeon">
         {renderDungeon()}
       </div>
+      </div>
+      <div className="terminal with-wrap">
+      {[...Array(rooms)].map((_, index) => (
+        <div key={index}><b className="green">{index + 1}: </b><Room withCorridor={false} /><br/><br/></div>
+      ))}
       </div>
     </div>
   );
