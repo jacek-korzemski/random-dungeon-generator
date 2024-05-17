@@ -11,8 +11,9 @@ interface Room {
 const DungeonGenerator: React.FC = () => {
   const dungeonWidth = 70;
   const dungeonHeight = 25;
-  const roomMaxSize = 6;
-  const roomMinSize = 3;
+  const [roomMaxSize, setRoomMaxSize] = useState(6);
+  const [roomMinSize, setRoomMinSize] = useState(3);
+  const [numberOfRooms, setNumberOfRooms] = useState(3);
 
   const initialDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
 
@@ -51,14 +52,13 @@ const DungeonGenerator: React.FC = () => {
   };
 
   const generateDungeonRooms = () => {
-    const maxRooms = 5;
     let rooms: Room[] = [];
     let corridors: Room[] = [];
     let numRooms = 0;
     let roomNumber = 1;
     let newDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
   
-    while (numRooms < maxRooms) {
+    while (numRooms < numberOfRooms) {
       let width = Math.floor(Math.random() * (roomMaxSize - roomMinSize + 1)) + roomMinSize;
       let height = Math.floor(Math.random() * (roomMaxSize - roomMinSize + 1)) + roomMinSize;
       let x = Math.floor(Math.random() * (dungeonWidth - width - 1)) + 1;
@@ -152,16 +152,16 @@ const DungeonGenerator: React.FC = () => {
         <h1>ASCII Dungeon Generator (React)</h1>
         <div className="formLike">
           <div className="formGroup">
-            <label htmlFor="rooms">Number of Rooms</label>
-            <input type="number" id="rooms" value={0} onChange={() => {}} />
-          </div>
-          <div className="formGroup">
-            <label htmlFor="minSize">Min Room size</label>
-            <input type="number" id="minSize" value={0} onChange={() => {}} />
-          </div>
-          <div className="formGroup">
             <label htmlFor="maxSize">Max Room size</label>
-            <input type="number" id="maxSize" value={0} onChange={() => {}} />
+            <input type="number" id="maxSize" value={roomMaxSize} onChange={(e) => {setRoomMaxSize(parseInt(e.target.value))}} />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="maxSize">Min room size</label>
+            <input type="number" id="maxSize" value={roomMinSize} onChange={(e) => {setRoomMinSize(parseInt(e.target.value))}} />
+          </div>
+          <div className="formGroup">
+            <label htmlFor="maxSize">Number of rooms</label>
+            <input type="number" id="maxSize" value={numberOfRooms} onChange={(e) => {setNumberOfRooms(parseInt(e.target.value))}} />
           </div>
           <div className="formGroup">
           <button onClick={generateDungeonRooms}>Generate Dungeon</button>
@@ -176,7 +176,7 @@ const DungeonGenerator: React.FC = () => {
       </div>
       <div className="terminal with-wrap">
       {[...Array(rooms)].map((_, index) => (
-        <div key={index}><b className="green">{index + 1}: </b><Room withCorridor={false} /><br/><br/></div>
+        <div key={index} style={{breakInside: 'avoid'}}><b className="green">{index + 1}: </b><Room withCorridor={false} /><br/><br/></div>
       ))}
       </div>
     </div>

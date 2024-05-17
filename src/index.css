@@ -73,6 +73,12 @@ body {
   align-items: flex-start;
 }
 
+.formGroup input[type="number"] {
+  max-width: 64px;
+  padding: 4px;
+  font-size: 16px;
+}
+
 .formLike {
   display: flex;
   justify-content: space-between;
