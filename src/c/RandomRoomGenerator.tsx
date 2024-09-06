@@ -2,10 +2,11 @@ import { items, furniture } from "../assets/data/content";
 import { tunels } from "../assets/data/tunels";
 import { insides } from "../assets/data/insides";
 import { rooms } from "../assets/data/rooms";
+import { rde } from "../assets/data/randomDungeonEncounteres";
 import { useEffect, useState } from "react";
 
 export const Room = ({withCorridor = true}) => {
-  const [roomData, setRoomData] = useState<undefined | {tunel: string, room: string, insides: string, furniture: string, items: string}> (undefined);
+  const [roomData, setRoomData] = useState<undefined | {tunel: string, room: string, insides: string, furniture: string, items: string, encounter: string}> (undefined);
 
   const generateRoom = () => {
     setRoomData({
@@ -14,6 +15,7 @@ export const Room = ({withCorridor = true}) => {
       insides: insides[Math.floor(Math.random()*insides.length)],
       furniture: furniture[Math.floor(Math.random()*furniture.length)],
       items: items[Math.floor(Math.random()*items.length)],
+      encounter: rde[Math.floor(Math.random()*rde.length)]
     })
   }
 
@@ -28,6 +30,8 @@ export const Room = ({withCorridor = true}) => {
     Inside the room, you can see <b>{roomData?.insides}</b>. 
     You can find here <b>{roomData?.furniture}</b>, 
     and after short investigetion you can find <b>{roomData?.items}</b>. 
+    <br/>
+    <strong> <b>Bonus encounter:</b> </strong>{roomData?.encounter} 
   </div>
 }
 

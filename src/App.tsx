@@ -3,6 +3,7 @@ import { useState } from "react";
 import RandomRoomGenerator from "./c/RandomRoomGenerator";
 import RandomRoadEncounterGenerator from "./c/RandomRoadEncounterGenerator";
 import RandomQuestGenerator from "./c/RandomQuestGenerator";
+import RandomDungeonEncounterGenerator from "./c/RandomDungeonEncounterGenerator";
 
 function App() {
   const [mode, setMode] = useState<string>('ascii');
@@ -12,12 +13,14 @@ function App() {
         <button onClick={() => setMode('ascii')}>ASCII Dungeon</button>
         <button onClick={() => setMode('desc')}>Rooms</button>
         <button onClick={() => setMode('road')}>Road events</button>
+        <button onClick={() => setMode('dungeon')}>Dungeon events</button>
         <button onClick={() => setMode('quest')}>Quests</button>
         <hr/>
       </div>
       {mode === "ascii" && <DungeonGenerator />}
       {mode === "desc" && <RandomRoomGenerator />}
       {mode === "road" && <RandomRoadEncounterGenerator />}
+      {mode === "dungeon" && <RandomDungeonEncounterGenerator />}
       {mode === "quest" && <RandomQuestGenerator />}
     </div>
   </div>;
