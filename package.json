@@ -1,5 +1,6 @@
 {
   "name": "random-dungeon-generator",
+  "homepage": "/tools/random-generators",
   "private": true,
   "version": "0.0.0",
   "type": "module",

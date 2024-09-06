@@ -36,6 +36,10 @@ body {
   white-space: initial;
 }
 
+.with-wrap, .with-wrap * {
+  white-space: initial;
+}
+
 .terminal b {
   color: green;
 }
