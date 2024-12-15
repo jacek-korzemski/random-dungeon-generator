@@ -28,8 +28,11 @@ body {
   line-height: 1.5;
   margin: 0;
   padding: 10px;
-  white-space: pre; /* Preserves whitespace and line breaks */
   overflow: auto;
+}
+
+.pre-white-space {
+  white-space: pre;
 }
 
 .terminal.with-wrap {
