@@ -4,8 +4,9 @@ import { insides } from "../assets/data/insides";
 import { rooms } from "../assets/data/rooms";
 import { rde } from "../assets/data/randomDungeonEncounteres";
 import { useEffect, useState } from "react";
+import Layout from "./Layout";
 
-export const Room = ({withCorridor = true}) => {
+export const Room = ({withCorridor = true, index}: {withCorridor?: boolean, index?: number}) => {
   const [roomData, setRoomData] = useState<undefined | {tunel: string, room: string, insides: string, furniture: string, items: string, encounter: string}> (undefined);
 
   const generateRoom = () => {
@@ -23,7 +24,8 @@ export const Room = ({withCorridor = true}) => {
     generateRoom();
   }, [])
 
-  return <div>
+  return <p style={{userSelect: "none"}}>
+    {index && <b style={{marginRight: "10px"}}>{index}</b>}
     <span onClick={generateRoom} style={{cursor: 'pointer', color: 'orange'}} className="no-print">♻</span>{" "}
     {withCorridor && <>You were wandering through <b>{roomData?.tunel}</b>. </>}
     You enter into <b>{roomData?.room}</b>. 
@@ -32,12 +34,12 @@ export const Room = ({withCorridor = true}) => {
     and after short investigetion you can find <b>{roomData?.items}</b>. 
     <br/>
     <strong> <b>Bonus encounter:</b> </strong>{roomData?.encounter} 
-  </div>
+  </p>
 }
 
 const RandomRoomGenerator = () => {
 
-  return <div className="terminal with-wrap">
+  return <Layout><div className="post">
     <Room />
     <hr/>
     <Room />
@@ -48,6 +50,7 @@ const RandomRoomGenerator = () => {
     <hr/>
     <Room />
   </div> 
+  </Layout>
 }
 
 export default RandomRoomGenerator

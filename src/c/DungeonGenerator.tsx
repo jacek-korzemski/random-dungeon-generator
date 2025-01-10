@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Room } from './RandomRoomGenerator';
+import React, { useState } from "react";
+import Layout from "./Layout";
+import { Room } from "./RandomRoomGenerator";
 
 interface Room {
   x: number;
@@ -13,173 +14,167 @@ const DungeonGenerator: React.FC = () => {
   const dungeonHeight = 25;
   const [roomMaxSize, setRoomMaxSize] = useState(6);
   const [roomMinSize, setRoomMinSize] = useState(3);
-  const [numberOfRooms, setNumberOfRooms] = useState(3);
+  const [numberOfRooms, setNumberOfRooms] = useState(6);
 
-  const initialDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
+  const initialDungeon: string[][] = Array.from({ length: dungeonHeight }, () =>
+    Array.from({ length: dungeonWidth }, () => ".")
+  );
 
   const [dungeon, setDungeon] = useState<string[][]>(initialDungeon);
-  const [rooms, setRooms] = useState<number>(0);
 
-  const createRoom = (x: number, y: number, width: number, height: number) => {
-    setRooms((prev) => prev + 1);
-    const newDungeon = [...dungeon];
-    for (let i = y; i < y + height; i++) {
-      for (let j = x; j < x + width; j++) {
-        newDungeon[i][j] = "#";
-      }
-    }
-    setDungeon(newDungeon);
+  const reset = () => {
+    setDungeon(initialDungeon);
   };
 
-  const createHorizontalCorridor = (x1: number, x2: number, y: number) => {
-    const newDungeon = [...dungeon];
-    for (let i = Math.min(x1, x2); i <= Math.max(x1, x2); i++) {
-      if (newDungeon[y][i] === ".") {
-        newDungeon[y][i] = "#";
-      }
-    }
-    setDungeon(newDungeon);
-  };
+  const generateDungeon = () => {
+    const rooms: Room[] = [];
+    const newDungeon: string[][] = Array.from({ length: dungeonHeight }, () =>
+      Array.from({ length: dungeonWidth }, () => ".")
+    );
   
-  const createVerticalCorridor = (y1: number, y2: number, x: number) => {
-    const newDungeon = [...dungeon];
-    for (let i = Math.min(y1, y2); i <= Math.max(y1, y2); i++) {
-      if (newDungeon[i][x] === ".") {
-        newDungeon[i][x] = "#";
-      }
-    }
-    setDungeon(newDungeon);
-  };
-
-  const generateDungeonRooms = () => {
-    let rooms: Room[] = [];
-    let corridors: Room[] = [];
-    let numRooms = 0;
-    let roomNumber = 1;
-    let newDungeon: string[][] = Array.from({ length: dungeonHeight }, () => Array.from({ length: dungeonWidth }, () => "."));
+    let attempts = 0;
   
-    while (numRooms < numberOfRooms) {
-      let width = Math.floor(Math.random() * (roomMaxSize - roomMinSize + 1)) + roomMinSize;
-      let height = Math.floor(Math.random() * (roomMaxSize - roomMinSize + 1)) + roomMinSize;
-      let x = Math.floor(Math.random() * (dungeonWidth - width - 1)) + 1;
-      let y = Math.floor(Math.random() * (dungeonHeight - height - 1)) + 1;
+    while (rooms.length < numberOfRooms && attempts < numberOfRooms * 10) {
+      const width = Math.floor(
+        Math.random() * (roomMaxSize - roomMinSize + 1)
+      ) + roomMinSize;
+      const height = Math.floor(
+        Math.random() * (roomMaxSize - roomMinSize + 1)
+      ) + roomMinSize;
+      const x = Math.floor(Math.random() * (dungeonWidth - width - 3)) + 1;
+      const y = Math.floor(Math.random() * (dungeonHeight - height - 3)) + 1;
   
-      let newRoom: Room = { x, y, width, height };
-      let intersects = false;
-      for (let room of rooms) {
-        if (x < room.x + room.width &&
-          x + width > room.x &&
-          y < room.y + room.height &&
-          y + height > room.y) {
-          intersects = true;
-          break;
-        }
-      }
-  
-      if (!intersects) {
-        createRoom(x, y, width, height);
+      if (isRoomValidWithBuffer(x, y, width, height, rooms)) {
+        const newRoom = { x, y, width, height };
         rooms.push(newRoom);
-        numRooms++;
+        // Add the room to the dungeon
+        for (let i = y; i < y + height; i++) {
+          for (let j = x; j < x + width; j++) {
+            newDungeon[i][j] = "#";
+          }
+        }
+        // Label the room
+        const labelX = x + Math.floor(width / 2);
+        const labelY = y + Math.floor(height / 2);
+        newDungeon[labelY][labelX] = `${rooms.length}`;
       }
+  
+      attempts++;
     }
   
     // Connect rooms with corridors
     for (let i = 0; i < rooms.length - 1; i++) {
-      let room1 = rooms[i];
-      let room2 = rooms[i + 1];
+      const room1 = rooms[i];
+      const room2 = rooms[i + 1];
   
-      let x1 = Math.floor(room1.x + room1.width / 2);
-      let y1 = Math.floor(room1.y + room1.height / 2);
-      let x2 = Math.floor(room2.x + room2.width / 2);
-      let y2 = Math.floor(room2.y + room2.height / 2);
+      const x1 = room1.x + Math.floor(room1.width / 2);
+      const y1 = room1.y + Math.floor(room1.height / 2);
+      const x2 = room2.x + Math.floor(room2.width / 2);
+      const y2 = room2.y + Math.floor(room2.height / 2);
   
       if (Math.random() < 0.5) {
-        createHorizontalCorridor(x1, x2, y1);
-        createVerticalCorridor(y1, y2, x2);
-        corridors.push({ x: x1, y: y1, width: x2 - x1 + 1, height: y2 - y1 + 1 });
+        // Horizontal first, then vertical
+        createHorizontalCorridor(newDungeon, x1, x2, y1);
+        createVerticalCorridor(newDungeon, y1, y2, x2);
       } else {
-        createVerticalCorridor(y1, y2, x1);
-        createHorizontalCorridor(x1, x2, y2);
-        corridors.push({ x: x1, y: y1, width: x2 - x1 + 1, height: y2 - y1 + 1 });
+        // Vertical first, then horizontal
+        createVerticalCorridor(newDungeon, y1, y2, x1);
+        createHorizontalCorridor(newDungeon, x1, x2, y2);
       }
     }
   
-    // Label rooms
-    for (let room of rooms) {
-      labelRoom(room, roomNumber.toString());
-      roomNumber++;
-    }
-  
-    // Copy the modified dungeon layout into newDungeon
-    for (let i = 0; i < dungeonHeight; i++) {
-      for (let j = 0; j < dungeonWidth; j++) {
-        newDungeon[i][j] = dungeon[i][j];
-      }
-    }
-  
-    // Set the new dungeon state
     setDungeon(newDungeon);
   };
   
-  const labelRoom = (room: Room, label: string) => {
-    // Choose a random cell within the room
-    const randomX = Math.floor(room.width / 2) + room.x;
-    const randomY = Math.floor(room.height / 2) + room.y;
-    
-    // Label the random cell with the given label
-    dungeon[randomY][randomX] = label;
+  const isRoomValidWithBuffer = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    rooms: Room[]
+  ) => {
+    const buffer = 1; // Add a buffer space around the room
+    for (const room of rooms) {
+      if (
+        x < room.x + room.width + buffer &&
+        x + width + buffer > room.x &&
+        y < room.y + room.height + buffer &&
+        y + height + buffer > room.y
+      ) {
+        return false; // Room overlaps or is too close
+      }
+    }
+    return true;
   };
+  
+  const createHorizontalCorridor = (
+    dungeon: string[][],
+    x1: number,
+    x2: number,
+    y: number
+  ) => {
+    for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
+      if (dungeon[y][x] === ".") {
+        dungeon[y][x] = "#";
+      }
+    }
+  };
+  
+  const createVerticalCorridor = (
+    dungeon: string[][],
+    y1: number,
+    y2: number,
+    x: number
+  ) => {
+    for (let y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
+      if (dungeon[y][x] === ".") {
+        dungeon[y][x] = "#";
+      }
+    }
+  }; 
 
-  const renderDungeon = () => {
-    return dungeon.map((row, rowIndex) => (
+  const renderDungeon = () =>
+    dungeon.map((row, rowIndex) => (
       <div key={rowIndex}>
         {row.map((cell, cellIndex) => (
-          <span key={cellIndex} className={![".", "#"].includes(cell) ? "green" : "none"}>{cell}</span>
+          <span key={cellIndex}>{cell}</span>
         ))}
-        <br />
       </div>
     ));
-  };
-
-  const reset = () => {
-    setDungeon(initialDungeon);
-    setRooms(0);
-  }
 
   return (
-    <div>
-      <div className="no-print">
-        <h1>ASCII Dungeon Generator (React)</h1>
-        <div className="formLike">
-          <div className="formGroup">
-            <label htmlFor="maxSize">Max Room size</label>
-            <input type="number" id="maxSize" value={roomMaxSize} onChange={(e) => {setRoomMaxSize(parseInt(e.target.value))}} />
-          </div>
-          <div className="formGroup">
-            <label htmlFor="maxSize">Min room size</label>
-            <input type="number" id="maxSize" value={roomMinSize} onChange={(e) => {setRoomMinSize(parseInt(e.target.value))}} />
-          </div>
-          <div className="formGroup">
-            <label htmlFor="maxSize">Number of rooms</label>
-            <input type="number" id="maxSize" value={numberOfRooms} onChange={(e) => {setNumberOfRooms(parseInt(e.target.value))}} />
-          </div>
-          <div className="formGroup">
-          <button onClick={generateDungeonRooms}>Generate Dungeon</button>
+    <Layout>
+      <h1>ASCII Dungeon Generator</h1>
+      <div>
+        <label>
+          Max Room Size:
+          <input
+            type="number"
+            value={roomMaxSize}
+            onChange={(e) => setRoomMaxSize(Number(e.target.value))}
+          />
+        </label>
+        <label>
+          Min Room Size:
+          <input
+            type="number"
+            value={roomMinSize}
+            onChange={(e) => setRoomMinSize(Number(e.target.value))}
+          />
+        </label>
+        <label>
+          Number of Rooms:
+          <input
+            type="number"
+            value={numberOfRooms}
+            onChange={(e) => setNumberOfRooms(Number(e.target.value))}
+          />
+        </label>
+        <button onClick={generateDungeon}>Generate Dungeon</button>
         <button onClick={reset}>Reset</button>
-          </div>
-        </div>
       </div>
-      <div className="terminal">
-      <div className="dungeon">
-        {renderDungeon()}
-      </div>
-      </div>
-      <div className="terminal with-wrap">
-      {[...Array(rooms)].map((_, index) => (
-        <div key={index} style={{breakInside: 'avoid'}}><b className="green">{index + 1}: </b><Room withCorridor={false} /><br/><br/></div>
-      ))}
-      </div>
-    </div>
+      <div className="terminal" style={{marginBottom: '64px'}}>{renderDungeon()}</div>
+    </Layout>
   );
 };
 

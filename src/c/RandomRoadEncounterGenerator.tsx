@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { rre } from "../assets/data/randomRoadEncounters";
+import Layout from "./Layout";
 
 const RandomRoadEncounterGenerator = () => {
   const [number, setNumber] = useState<number>(5);
@@ -15,24 +16,32 @@ const RandomRoadEncounterGenerator = () => {
     setEvents(randomEncounters());
   };
 
+  useEffect(() => {
+    handleGenerate();
+  }, [])
+
   return (
-    <>
-      <h1>Random Dungeon Events</h1>
-      <hr />
-      <button onClick={() => { setNumber(number + 1); }}>+</button>
-      <button onClick={handleGenerate}>Generate {number}</button>
-      <button onClick={() => { setNumber(number - 1); }}>-</button>
-      <hr />
+    <Layout>
+      <div className="post">
+      <h1>Random Road Events</h1>
+      <div style={{display: 'flex', gap: '4px'}}>
+      <button className="btn brn-primary" onClick={() => { setNumber(number + 1); }}>+</button>
+      <button className="btn brn-primary" onClick={handleGenerate}>Generate {number}</button>
+      <button className="btn brn-primary" onClick={() => { setNumber(number - 1); }}>-</button>
+      </div>
+      <div style={{textAlign: 'left', width: '100%'}}>
       {events.length > 0 && (
         <>
           {events.map((event, index) => (
-            <div key={index}>
+            <p key={index}>
               {index + 1} : {event}
-            </div>
+            </p>
           ))}
         </>
       )}
-    </>
+      </div>
+      </div>
+    </Layout>
   );
 }
 
