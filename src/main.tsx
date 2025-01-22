@@ -8,6 +8,7 @@ import RandomRoadEncounterGenerator from './c/RandomRoadEncounterGenerator.tsx';
 import RandomDungeonEncounterGenerator from './c/RandomDungeonEncounterGenerator.tsx';
 import RandomQuestGenerator from './c/RandomQuestGenerator.tsx';
 import RandomTreasure from './c/RandomTreasure.tsx';
+import RandomTables from './c/RandomTables.tsx';
 
 const root = document.getElementById("root");
 
@@ -25,6 +26,7 @@ ReactDOM.createRoot(root).render(
       <Route path="/random-dungeon-encounter-generator" element={<RandomDungeonEncounterGenerator />} />
       <Route path="/random-quest-generator" element={<RandomQuestGenerator />} />
       <Route path="/random-treasure-generator" element={<RandomTreasure />} />
+      <Route path="/random-tables" element={<RandomTables />} />
     </Routes>
   </BrowserRouter>
 );

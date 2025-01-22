@@ -10,6 +10,7 @@ const Home = () => {
     { path: '/random-dungeon-encounter-generator', label: 'Random Dungeon Encounter Generator' },
     { path: '/random-quest-generator', label: 'Random Quest Generator' },
     { path: '/random-treasure-generator', label: 'Random Treasure Generator' },
+    { path: '/random-tables', label: 'Random Tables' },
   ];
 
   return (

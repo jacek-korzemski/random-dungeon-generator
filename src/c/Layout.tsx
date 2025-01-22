@@ -31,6 +31,9 @@ const Layout = ({children}: {children: ReactNode}) => {
         <li>
           <Link to={"/random-treasure-generator"}>Treasures</Link>
         </li>
+        <li>
+          <Link to={"/random-tables"}>Tables</Link>
+        </li>
       </ul>
     </div>
     </div>
