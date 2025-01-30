@@ -1,0 +1,11 @@
+Number;Spell Level;Name;Rarity;Description
+1;Cantrip;Mage Hand;Common;Create a spectral hand to manipulate objects.
+2;Cantrip;Fire Bolt;Common;A ranged spell attack dealing fire damage.
+3;1st;Detect Magic;Common;Sense the presence of magic within 30 feet.
+4;1st;Shield;Common;Add +5 to AC as a reaction.
+5;1st;Magic Missile;Common;Automatically hits and deals force damage.
+6;2nd;Misty Step;Uncommon;Teleport up to 30 feet as a bonus action.
+7;2nd;Hold Person;Uncommon;Paralyze a humanoid within range.
+8;3rd;Counterspell;Uncommon;Interrupt another caster’s spell.
+9;3rd;Fireball;Uncommon;A classic spell dealing explosive fire damage in a 20-foot radius.
+10;4th;Greater Invisibility;Rare;Turn a creature invisible, even when it attacks or casts spells.
