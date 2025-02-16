@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 import "../assets/menu.css";
-import Layout from './Layout';
+import Layout from './../Layout/Layout';
 
 const Home = () => {
   const menuItems = [

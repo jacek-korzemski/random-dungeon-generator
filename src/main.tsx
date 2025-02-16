@@ -1,14 +1,14 @@
 import './index.css'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import Home from './c/Home.tsx';
-import DungeonGenerator from './c/DungeonGenerator.tsx';
-import RandomRoomGenerator from './c/RandomRoomGenerator.tsx';
-import RandomRoadEncounterGenerator from './c/RandomRoadEncounterGenerator.tsx';
-import RandomDungeonEncounterGenerator from './c/RandomDungeonEncounterGenerator.tsx';
-import RandomQuestGenerator from './c/RandomQuestGenerator.tsx';
-import RandomTreasure from './c/RandomTreasure.tsx';
-import RandomTables from './c/RandomTables.tsx';
+import Home from './components/Home/Home.tsx';
+import DungeonGenerator from './components/DungeonGenerator/DungeonGenerator.tsx';
+import RandomRoomGenerator from './components/RandomRoomGenerator/RandomRoomGenerator.tsx';
+import RandomRoadEncounterGenerator from './components/RandomRoadEncounterGenerator/RandomRoadEncounterGenerator.tsx';
+import RandomDungeonEncounterGenerator from './components/RandomDungeonEncounterGenerator/RandomDungeonEncounterGenerator.tsx';
+import RandomQuestGenerator from './components/RandomQuestGenerator/RandomQuestGenerator.tsx';
+import RandomTreasure from './components/RandomTreasure/RandomTreasure.tsx';
+import RandomTables from './components/RandomTables/RandomTables.tsx';
 
 const root = document.getElementById("root");
 

@@ -1,5 +1,5 @@
-import Layout from "./Layout";
-import Table from "./Table";
+import Layout from "./../Layout/Layout";
+import Table from "./../Table/Table";
 import randomTable from "./../assets/random-table.csv?raw"
 import randomWeaponTable from "./../assets/random-weapon-table.csv?raw"
 import wildMagic from "./../assets/wild-magic.csv?raw"
@@ -8,10 +8,9 @@ import events1 from "./../assets/events-1.csv?raw"
 import events2 from "./../assets/events-2.csv?raw"
 import treasures1 from "./../assets/treasures.csv?raw"
 import npc from "./../assets/npc.csv?raw"
-import { csvToTableData } from "./../h/csv-to-table-data.helper";
+import { csvToTableData } from "./../../helpers/csv-to-table-data.helper";
 
 const RandomTables = () => {
-
   const parsedRandomTable = csvToTableData(randomTable);
   const parsedRandomWeaponTable = csvToTableData(randomWeaponTable);
   const parsedWildMagic = csvToTableData(wildMagic);

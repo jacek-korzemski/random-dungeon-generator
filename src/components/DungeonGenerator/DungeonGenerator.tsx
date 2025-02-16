@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Layout from "./Layout";
-import { Room } from "./RandomRoomGenerator";
+import Layout from "./../Layout/Layout";
+import { Room } from "./../RandomRoomGenerator/RandomRoomGenerator";
 
 interface Room {
   x: number;

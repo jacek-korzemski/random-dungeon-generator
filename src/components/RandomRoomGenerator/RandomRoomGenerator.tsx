@@ -1,10 +1,10 @@
-import { items, furniture } from "../assets/data/content";
-import { tunels } from "../assets/data/tunels";
-import { insides } from "../assets/data/insides";
-import { rooms } from "../assets/data/rooms";
-import { rde } from "../assets/data/randomDungeonEncounteres";
+import { items, furniture } from "./../../assets/data/content";
+import { tunels } from "./../../assets/data/tunels";
+import { insides } from "./../../assets/data/insides";
+import { rooms } from "./../../assets/data/rooms";
+import { rde } from "./../../assets/data/randomDungeonEncounteres";
 import { useEffect, useState } from "react";
-import Layout from "./Layout";
+import Layout from "./../Layout/Layout";
 
 export const Room = ({withCorridor = true, index}: {withCorridor?: boolean, index?: number}) => {
   const [roomData, setRoomData] = useState<undefined | {tunel: string, room: string, insides: string, furniture: string, items: string, encounter: string}> (undefined);

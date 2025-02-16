@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import {peopleActions, people, itemActions, items, where,  why} from '../assets/data/quests';
-import Layout from './Layout';
+import {peopleActions, people, itemActions, items, where,  why} from './../../assets/data/quests';
+import Layout from './../Layout/Layout';
 
 function getRandomElement(arr: string[]) {
   return arr[Math.floor(Math.random() * arr.length)];

@@ -1,6 +1,6 @@
-import { treasure } from "../assets/data/randomTreasures";
+import { treasure } from "./../../assets/data/randomTreasures";
 import { useState } from "react";
-import Layout from "./Layout";
+import Layout from "./../Layout/Layout";
 
 const RandomTreasure = () => {
   const [t, setT] = useState<string | undefined>(undefined);
