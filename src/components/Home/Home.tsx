@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import "../assets/menu.css";
+import "../../assets/menu.css";
 import Layout from './../Layout/Layout';
 
 const Home = () => {
@@ -11,6 +11,7 @@ const Home = () => {
     { path: '/random-quest-generator', label: 'Random Quest Generator' },
     { path: '/random-treasure-generator', label: 'Random Treasure Generator' },
     { path: '/random-tables', label: 'Random Tables' },
+    { path: '/world-generator', label: 'World Generator' },
   ];
 
   return (

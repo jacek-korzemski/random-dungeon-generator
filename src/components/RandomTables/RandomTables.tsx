@@ -1,13 +1,13 @@
 import Layout from "./../Layout/Layout";
 import Table from "./../Table/Table";
-import randomTable from "./../assets/random-table.csv?raw"
-import randomWeaponTable from "./../assets/random-weapon-table.csv?raw"
-import wildMagic from "./../assets/wild-magic.csv?raw"
-import spellScrolls from "./../assets/spells.csv?raw"
-import events1 from "./../assets/events-1.csv?raw"
-import events2 from "./../assets/events-2.csv?raw"
-import treasures1 from "./../assets/treasures.csv?raw"
-import npc from "./../assets/npc.csv?raw"
+import randomTable from "../../assets/tables/random-table.csv?raw";
+import randomWeaponTable from "../../assets/tables/random-weapon-table.csv?raw"
+import wildMagic from "../../assets/tables/wild-magic.csv?raw"
+import spellScrolls from "../../assets/tables/spells.csv?raw"
+import events1 from "../../assets/tables/events-1.csv?raw"
+import events2 from "../../assets/tables/events-2.csv?raw"
+import treasures1 from "../../assets/tables/treasures.csv?raw"
+import npc from "../../assets/tables/npc.csv?raw"
 import { csvToTableData } from "./../../helpers/csv-to-table-data.helper";
 
 const RandomTables = () => {

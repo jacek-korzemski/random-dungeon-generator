@@ -34,6 +34,9 @@ const Layout = ({children}: {children: ReactNode}) => {
         <li>
           <Link to={"/random-tables"}>Tables</Link>
         </li>
+        <li>
+          <Link to={"/world-generator"}>World Generator</Link>
+        </li>
       </ul>
     </div>
     </div>
