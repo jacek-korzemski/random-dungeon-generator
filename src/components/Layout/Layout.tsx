@@ -8,7 +8,7 @@ const Layout = ({children}: {children: ReactNode}) => {
     <div className="topbar">
     <h2 className="center">Hidden Tools for GameMaster</h2>
     <div id="menu-open" onClick={() => setIsOpen(!isOpen)}>⏬</div>
-    <div className="main-menu">
+    <div className="main-menu container">
       <ul id="menu-main-menu" className={isOpen ? "open" : ""}>
         <li>
           <Link to={"/"}>Home</Link>
@@ -37,12 +37,16 @@ const Layout = ({children}: {children: ReactNode}) => {
         <li>
           <Link to={"/world-generator"}>World Generator</Link>
         </li>
+        <li>
+          <Link to={"/dungeon-cards"}>Dungeon cards</Link>
+        </li>
       </ul>
     </div>
     </div>
     <div className="hero" style={{background: "url('https://labiryntkostek.pl/wp-content/themes/wordpress-theme-boilerplate-master/assets/hero.png')", backgroundPosition: 'center', backgroundSize: "cover"}} >
     </div>
     <div className="container" style={{paddingTop: "32px"}}>{children}</div>
+    <footer style={{padding: '16px 0 16px 0', borderTop: '1px solid gray', marginTop: '32px', textAlign: 'center', fontSize: '12px', color: 'gray'}}>Copyright &copy; 2025 - Jacek Korzemski </footer>
     </div>
 }
 

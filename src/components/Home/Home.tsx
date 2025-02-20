@@ -12,6 +12,7 @@ const Home = () => {
     { path: '/random-treasure-generator', label: 'Random Treasure Generator' },
     { path: '/random-tables', label: 'Random Tables' },
     { path: '/world-generator', label: 'World Generator' },
+    { path: '/dungeon-cards', label: 'Dungeon Cards' },
   ];
 
   return (

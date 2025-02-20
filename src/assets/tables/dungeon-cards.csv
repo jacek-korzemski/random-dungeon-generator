@@ -1,0 +1,55 @@
+Card;Suit;Room Type;Description
+A♥;Hearts;Hidden Room;A secret passage or safe haven with supplies.
+2♥;Hearts;Small Resting Area;A quiet room with old furniture, safe to rest.
+3♥;Hearts;Healing Fountain;A magical fountain restores some health.
+4♥;Hearts;Hidden Library;Shelves of old books containing useful lore.
+5♥;Hearts;Friendly NPC;A traveler, healer, or merchant offering services.
+6♥;Hearts;Tranquil Garden;A peaceful area with glowing plants and soft music.
+7♥;Hearts;Safe Zone;A magically warded room, no monsters can enter.
+8♥;Hearts;Guardian Spirit;A spectral entity offers advice or a boon.
+9♥;Hearts;Puzzle Room;Solving a puzzle grants a minor reward.
+10♥;Hearts;Magical Pool;A shimmering pool that grants visions or buffs.
+J♥;Hearts;Mysterious Ally;A ghostly figure gives hints about the dungeon.
+Q♥;Hearts;Lost Treasure;An ornate chest, requiring a riddle to unlock.
+K♥;Hearts;Sanctuary;A large, safe chamber protected by ancient magic.
+A♦;Diamonds;Secret Vault;A well-hidden stash of treasure.
+2♦;Diamonds;Small Loot Room;A dusty storage room with minor treasures.
+3♦;Diamonds;Ancient Relic;A magical artifact lies here, with unknown effects.
+4♦;Diamonds;Hidden Safe;A small chest embedded in the wall.
+5♦;Diamonds;Trap-Laden Room;A chamber filled with valuable loot, but also deadly traps.
+6♦;Diamonds;Goblin Hoard;A pile of stolen gold and trinkets, guarded by weak foes.
+7♦;Diamonds;Cursed Gold;A pile of treasure, but touching it has consequences.
+8♦;Diamonds;Magic Weapon;A powerful weapon embedded in stone, requiring effort to obtain.
+9♦;Diamonds;Forgotten Altar;A shrine that offers a boon in exchange for a sacrifice.
+10♦;Diamonds;Legendary Chest;A large, ornate chest with high-value loot.
+J♦;Diamonds;Mischievous Spirit;A magical being tests the players before giving treasure.
+Q♦;Diamonds;Artifact Room;A legendary item locked behind a magical barrier.
+K♦;Diamonds;Treasure Vault;A massive treasure hoard, protected by a fierce guardian.
+A♣;Clubs;Dead End;A collapsed tunnel, requiring a workaround.
+2♣;Clubs;Narrow Passage;A tight corridor where players must squeeze through.
+3♣;Clubs;Pressure Plate Trap;Stepping carelessly may trigger arrows or flames.
+4♣;Clubs;Locked Door;A strong door that requires a key or brute force.
+5♣;Clubs;Puzzle Mechanism;Levers, gears, or runes must be aligned properly.
+6♣;Clubs;Illusionary Wall;A hidden pathway disguised as a solid wall.
+7♣;Clubs;Rotating Room;The room shifts, changing dungeon layout.
+8♣;Clubs;Poisoned Chamber;Toxic gas seeps from cracks in the walls.
+9♣;Clubs;Riddle Guardian;A stone statue asks a riddle - wrong answers trigger danger.
+10♣;Clubs;Elemental Trap;Fire, ice, or lightning threatens intruders.
+J♣;Clubs;Trickster Spirit;A playful entity challenges the party with riddles.
+Q♣;Clubs;Magic Seal;A barrier that requires a special phrase or item.
+K♣;Clubs;Giant Moving Statue;A stone guardian blocks the way unless solved or fought.
+A♠;Spades;Shadow Passage;A dark, eerie corridor where whispers echo.
+2♠;Spades;Small Monster Den;A few weak monsters lurk here.
+3♠;Spades;Ambush Room;Enemies lie in wait, ready to strike.
+4♠;Spades;Swarm Encounter;A horde of creatures floods the room.
+5♠;Spades;Pitfall Trap;A hidden hole drops careless explorers below.
+6♠;Spades;Haunting Presence;Shadows form into ghostly figures.
+7♠;Spades;Mini-Boss Battle;A strong foe lurks here, guarding the way forward.
+8♠;Spades;Dark Ritual Room;Evil magic lingers - breaking the ritual may have consequences.
+9♠;Spades;Monster Lair;A major enemy’s den, with bones and remains scattered around.
+10♠;Spades;Necromantic Chamber;Skeletons and ghouls rise to attack.
+J♠;Spades;Assassin’s Hideout;A deadly foe lurks, waiting for the perfect moment to strike.
+Q♠;Spades;Forbidden Tome;A book of dark magic—reading it could be a blessing or a curse.
+K♠;Spades;Dungeon Boss;The final boss or major antagonist of the dungeon.
+Joker (Red);Joker;Chaos Event;A wild, unpredictable event occurs (teleportation, time loop, divine intervention).
+Joker (Black);Joker;Dungeon Shift;The dungeon rearranges itself, changing all room connections.

@@ -10,6 +10,7 @@ import RandomQuestGenerator from './components/RandomQuestGenerator/RandomQuestG
 import RandomTreasure from './components/RandomTreasure/RandomTreasure.tsx';
 import RandomTables from './components/RandomTables/RandomTables.tsx';
 import WorldGenerator from './components/WorldGenerator/WorldGenerator.tsx';
+import DungeonCards from './components/DunceonCards/DungeonCards.tsx';
 
 const root = document.getElementById("root");
 
@@ -29,6 +30,7 @@ ReactDOM.createRoot(root).render(
       <Route path="/random-treasure-generator" element={<RandomTreasure />} />
       <Route path="/random-tables" element={<RandomTables />} />
       <Route path="/world-generator" element={<WorldGenerator />} />
+      <Route path="/dungeon-cards" element={<DungeonCards />} />
     </Routes>
   </BrowserRouter>
 );
